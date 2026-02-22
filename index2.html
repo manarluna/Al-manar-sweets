@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>حلويات المنار</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Tajawal:wght@300;400;500;700;900&family=Great+Vibes&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  /* ═══ GOLDEN HONEY PALETTE ═══ */
+  --gold:       #DEB22B;
+  --gold-light: #F0D070;
+  --gold-pale:  #FDF6E3;
+  --gold-deep:  #B76308;
+  --brown:      #6A2B08;
+  --sand:       #C29F8D;
+  --sand-light: #EFE0D0;
+
+  --cream:  #FBF5E8;
+  --cream2: #F5EAD0;
+  --text:   #3A1F08;
+  --text-mid:#7A4E20;
+  --text-soft:#B09060;
+  --white: #FFFFFF;
+
+  --font-ar:'Tajawal',sans-serif;
+  --font-en:'Playfair Display',serif;
+  --font-script:'Great Vibes',cursive;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+}
+body{
+  font-family:var(--font-ar);
+  background:var(--cream);
+  color:var(--text);
+  overflow-x:hidden;
+  line-height:1.8;
+}
+
+/* FLORAL DIVIDER */
+.floral{display:flex;align-items:center;justify-content:center;gap:12px}
+.floral .fl{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.floral .fd{color:var(--gold);font-size:1rem;letter-spacing:6px}
+
+/* ═══ NAVBAR ═══ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  height:74px;display:flex;align-items:center;
+  justify-content:space-between;padding:0 5%;
+  background:rgba(58,31,8,0.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(222,178,43,0.2);
+  transition:all .5s var(--ease);
+}
+#nav.sc{
+  background:rgba(251,245,232,0.97);
+  backdrop-filter:blur(20px);
+  box-shadow:0 2px 24px rgba(106,43,8,.12);
+  border-bottom:1px solid rgba(222,178,43,0.3);
+}
+.nav-logo{
+  text-decoration:none;display:flex;flex-direction:column;
+  align-items:flex-end;line-height:1;
+}
+[dir="ltr"] .nav-logo{align-items:flex-start}
+.nl-script{
+  font-family:var(--font-script);font-size:2rem;
+  color:var(--gold);transition:color .4s;line-height:1.1;
+}
+.nl-sub{
+  font-size:.63rem;font-weight:500;letter-spacing:3px;
+  color:rgba(222,178,43,0.7);text-transform:uppercase;transition:color .4s;
+}
+#nav.sc .nl-script{color:var(--brown)}
+#nav.sc .nl-sub{color:var(--text-soft)}
+
+.nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+.nav-links a{
+  font-size:.95rem;font-weight:500;color:rgba(255,255,255,.9);
+  text-decoration:none;position:relative;transition:color .3s;
+}
+#nav.sc .nav-links a{color:var(--text-mid)}
+.nav-links a:hover{color:var(--gold)!important}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;right:0;
+  width:0;height:1.5px;background:var(--gold);transition:width .3s var(--ease);
+}
+[dir="ltr"] .nav-links a::after{right:auto;left:0}
+.nav-links a:hover::after{width:100%}
+
+.nav-right{display:flex;align-items:center;gap:12px}
+.lang-sw{
+  display:flex;border:1px solid rgba(222,178,43,.4);
+  border-radius:30px;overflow:hidden;transition:border-color .4s;
+}
+.lb{
+  padding:5px 13px;border:none;background:transparent;
+  font-size:.72rem;font-weight:600;letter-spacing:1px;
+  color:rgba(222,178,43,.8);cursor:pointer;transition:all .3s;
+}
+.lb.active{background:var(--gold-deep);color:var(--white)!important}
+#nav.sc .lb{color:var(--text-soft)}
+
+.nav-cta{
+  padding:9px 22px;background:var(--gold-deep);color:var(--white);
+  border:none;border-radius:30px;font-family:var(--font-ar);
+  font-size:.85rem;font-weight:600;cursor:pointer;text-decoration:none;
+  transition:all .3s var(--ease);box-shadow:0 4px 16px rgba(183,99,8,.35);
+}
+.nav-cta:hover{background:var(--brown);transform:translateY(-2px)}
+
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hbg span{display:block;width:22px;height:1.5px;background:var(--gold);transition:all .3s}
+#nav.sc .hbg span{background:var(--text)}
+.hbg.open span:nth-child(1){transform:rotate(45deg) translate(4.5px,4.5px)}
+.hbg.open span:nth-child(2){opacity:0}
+.hbg.open span:nth-child(3){transform:rotate(-45deg) translate(4.5px,-4.5px)}
+
+/* DRAWER — fixed z-index + solid background */
+.drawer{
+  position:fixed;top:74px;left:0;right:0;bottom:0;
+  background:var(--gold-pale);z-index:1000;
+  display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:28px;
+  transform:translateY(-110%);transition:transform .5s var(--ease-out);
+}
+.drawer.open{transform:translateY(0)}
+.drawer a{
+  font-family:var(--font-ar);font-size:2rem;font-weight:700;
+  color:var(--brown);text-decoration:none;transition:color .3s;
+}
+.drawer a:hover{color:var(--gold-deep)}
+
+/* ═══ HERO ═══ */
+.hero{
+  position:relative;width:100%;height:100vh;min-height:680px;
+  overflow:hidden;display:flex;align-items:center;justify-content:center;
+}
+.hero-bg img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center top;
+  animation:zoom 18s ease-in-out infinite alternate;z-index:0;
+}
+@keyframes zoom{from{transform:scale(1)}to{transform:scale(1.09)}}
+.hero-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(106,43,8,.55) 0%,rgba(58,31,8,.82) 100%);
+  z-index:1;
+}
+.hero-deco{
+  position:absolute;z-index:2;pointer-events:none;
+  font-size:5rem;opacity:.15;color:var(--gold);line-height:1;
+}
+.deco-tr{top:86px;right:4%}
+.deco-bl{bottom:44px;left:4%;transform:scaleX(-1)}
+.hero-content{
+  position:relative;z-index:3;text-align:center;
+  padding:0 5%;animation:up 1.1s var(--ease-out) .2s both;
+}
+@keyframes up{from{opacity:0;transform:translateY(45px)}to{opacity:1;transform:translateY(0)}}
+.hero-pre{
+  font-family:var(--font-script);font-size:clamp(1.4rem,3vw,2.2rem);
+  color:rgba(255,255,255,.9);display:block;margin-bottom:6px;
+}
+.hero-h1{
+  font-family:var(--font-ar);font-size:clamp(3rem,8vw,6.5rem);font-weight:900;
+  color:var(--gold);line-height:1.1;text-shadow:0 4px 30px rgba(106,43,8,.5);
+  margin-bottom:8px;letter-spacing:2px;
+}
+.hero-h1-en{
+  font-family:var(--font-script);font-size:clamp(2.5rem,5vw,4.5rem);
+  color:var(--gold);line-height:1.2;margin-bottom:8px;
+}
+.hero-tag{
+  font-size:clamp(.88rem,1.8vw,1.05rem);font-weight:300;
+  color:rgba(255,255,255,.88);letter-spacing:4px;
+  margin-bottom:36px;font-style:italic;
+}
+.hero-badges{
+  display:flex;align-items:center;justify-content:center;
+  gap:28px;margin-bottom:38px;flex-wrap:wrap;
+}
+.hb-item{display:flex;flex-direction:column;align-items:center;gap:3px}
+.hb-num{font-family:var(--font-en);font-size:1.9rem;font-weight:700;color:var(--gold);line-height:1}
+.hb-label{font-size:.7rem;font-weight:400;letter-spacing:2px;color:rgba(255,255,255,.7)}
+.hb-sep{width:1px;height:38px;background:rgba(222,178,43,.3)}
+.hero-btns{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:9px;padding:14px 32px;
+  background:var(--gold);color:var(--brown);border:none;border-radius:50px;
+  font-family:var(--font-ar);font-size:.93rem;font-weight:700;
+  text-decoration:none;cursor:pointer;transition:all .35s var(--ease);
+  box-shadow:0 6px 24px rgba(0,0,0,.2);
+}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.25)}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:9px;padding:13px 32px;
+  background:transparent;color:var(--white);
+  border:1.5px solid rgba(222,178,43,.6);border-radius:50px;
+  font-family:var(--font-ar);font-size:.93rem;font-weight:500;
+  text-decoration:none;cursor:pointer;transition:all .35s var(--ease);
+}
+.btn-ghost:hover{background:rgba(222,178,43,.15);border-color:var(--gold);transform:translateY(-3px)}
+.hero-scroll{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  z-index:3;display:flex;flex-direction:column;align-items:center;
+  gap:6px;animation:up 1s 1.4s both;
+}
+.hero-scroll i{color:rgba(222,178,43,.6);font-size:1.2rem;animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+.hero-scroll span{font-size:.6rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+
+/* WAVE */
+.wave{width:100%;line-height:0;background:var(--gold-pale)}
+.wave svg{display:block;width:100%}
+
+/* SECTION COMMONS */
+.section{padding:90px 5%}
+.s-script{
+  font-family:var(--font-script);font-size:clamp(1.5rem,2.5vw,2.2rem);
+  color:var(--gold-deep);display:block;margin-bottom:4px;
+}
+.s-title{
+  font-family:var(--font-ar);font-size:clamp(1.8rem,4vw,2.9rem);
+  font-weight:900;color:var(--text);margin-bottom:12px;line-height:1.2;
+}
+.s-desc{
+  font-size:1rem;font-weight:300;color:var(--text-soft);
+  line-height:1.9;max-width:500px;margin:0 auto;
+}
+
+/* REVEAL */
+.reveal{
+  opacity:0;transform:translateY(35px);
+  transition:opacity .85s var(--ease-out),transform .85s var(--ease-out);
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ═══ MENU ═══ */
+#menu{background:var(--gold-pale)}
+.menu-hdr{text-align:center;margin-bottom:56px}
+.menu-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:26px;max-width:1100px;margin:0 auto;
+}
+.mc{
+  background:var(--white);border-radius:22px;overflow:hidden;
+  box-shadow:0 8px 40px rgba(106,43,8,.1);
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+  opacity:0;transform:translateY(40px);
+}
+.mc.visible{
+  opacity:1;transform:translateY(0);
+  transition:opacity .7s var(--ease-out),transform .7s var(--ease-out),box-shadow .4s var(--ease);
+}
+.mc:hover{transform:translateY(-10px);box-shadow:0 24px 60px rgba(106,43,8,.18)}
+.mc-img{position:relative;height:250px;overflow:hidden}
+.mc-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.mc:hover .mc-img img{transform:scale(1.09)}
+.mc-ribbon{
+  position:absolute;top:16px;right:16px;background:var(--gold-deep);
+  color:var(--white);font-size:.67rem;font-weight:700;
+  letter-spacing:2px;padding:5px 13px;border-radius:20px;
+}
+[dir="ltr"] .mc-ribbon{right:auto;left:16px}
+.mc-ov{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(106,43,8,.75) 0%,transparent 55%);
+  opacity:0;transition:opacity .4s;display:flex;align-items:flex-end;
+  justify-content:center;padding-bottom:22px;
+}
+.mc:hover .mc-ov{opacity:1}
+.mc-ov-btn{
+  display:inline-flex;align-items:center;gap:8px;padding:9px 22px;
+  background:var(--gold);color:var(--brown);border-radius:30px;
+  font-family:var(--font-ar);font-size:.83rem;font-weight:700;
+  border:none;cursor:pointer;transform:translateY(16px);transition:transform .4s var(--ease);
+}
+.mc:hover .mc-ov-btn{transform:translateY(0)}
+.mc-body{padding:24px 22px 28px;text-align:center}
+.mc-icon{font-size:2.1rem;display:block;margin-bottom:8px}
+.mc-name{font-family:var(--font-ar);font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.mc-desc{font-size:.84rem;font-weight:300;color:var(--text-soft);line-height:1.75;margin-bottom:18px}
+.mc-btn{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 20px;
+  background:var(--gold-pale);color:var(--brown);border:1.5px solid var(--gold-light);
+  border-radius:30px;font-family:var(--font-ar);font-size:.82rem;font-weight:600;
+  cursor:pointer;transition:all .3s var(--ease);text-decoration:none;
+}
+.mc-btn:hover{background:var(--gold-deep);color:var(--white);border-color:var(--gold-deep);transform:scale(1.04)}
+
+/* ═══ PORTFOLIO / GALLERY ═══ */
+#portfolio{background:var(--cream2)}
+.portfolio-hdr{text-align:center;margin-bottom:56px}
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:16px;max-width:1100px;margin:0 auto 40px;
+}
+.gallery-item{
+  position:relative;border-radius:16px;overflow:hidden;
+  aspect-ratio:1;background:var(--sand-light);
+  box-shadow:0 6px 24px rgba(106,43,8,.1);
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+  cursor:pointer;
+}
+.gallery-item:hover{transform:scale(1.03);box-shadow:0 16px 48px rgba(106,43,8,.2)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.gallery-item:hover img{transform:scale(1.08)}
+.gallery-item .gi-ov{
+  position:absolute;inset:0;background:rgba(58,31,8,.5);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .3s;
+}
+.gallery-item:hover .gi-ov{opacity:1}
+.gi-ov i{color:var(--gold);font-size:2rem}
+
+/* Gallery lightbox */
+.lightbox{
+  position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.lightbox.open{opacity:1;pointer-events:all}
+.lightbox img{max-width:90vw;max-height:85vh;border-radius:12px;object-fit:contain}
+.lightbox-close{
+  position:absolute;top:20px;right:20px;color:var(--gold);
+  font-size:2rem;cursor:pointer;background:none;border:none;
+  transition:transform .3s;
+}
+.lightbox-close:hover{transform:scale(1.2)}
+
+/* ═══ ABOUT ═══ */
+#about{background:var(--white)}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;max-width:1100px;margin:0 auto;
+}
+.about-imgs{position:relative;height:500px}
+.ai-main{
+  position:absolute;top:0;right:0;width:70%;height:67%;
+  object-fit:cover;border-radius:18px;
+  box-shadow:0 20px 60px rgba(106,43,8,.15);
+}
+[dir="ltr"] .ai-main{right:auto;left:0}
+.ai-sec{
+  position:absolute;bottom:0;left:0;width:57%;height:52%;
+  object-fit:cover;border-radius:18px;
+  box-shadow:0 20px 60px rgba(106,43,8,.15);
+  border:8px solid var(--cream);
+  animation:floatImg 7s ease-in-out infinite;
+}
+[dir="ltr"] .ai-sec{left:auto;right:0}
+@keyframes floatImg{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.ai-badge{
+  position:absolute;top:50%;right:50%;transform:translate(50%,-50%);
+  background:var(--gold-deep);color:var(--white);border-radius:50%;
+  width:105px;height:105px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  box-shadow:0 10px 30px rgba(183,99,8,.4);z-index:3;text-align:center;
+}
+.aib-num{font-family:var(--font-en);font-size:1.7rem;font-weight:700;line-height:1}
+.aib-txt{font-size:.58rem;font-weight:500;letter-spacing:1px;opacity:.8;line-height:1.3}
+.about-text{display:flex;flex-direction:column;gap:18px}
+.about-desc{font-size:1rem;font-weight:300;color:var(--text-mid);line-height:1.95}
+.vals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.val{
+  background:var(--gold-pale);border-radius:14px;padding:18px 16px;
+  display:flex;align-items:flex-start;gap:12px;
+  border:1.5px solid transparent;transition:all .3s var(--ease);
+}
+.val:hover{
+  border-color:var(--gold-light);background:var(--white);
+  transform:translateY(-3px);box-shadow:0 8px 24px rgba(106,43,8,.1);
+}
+.val-icon{font-size:1.3rem;flex-shrink:0}
+.val-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.val-desc{font-size:.77rem;color:var(--text-soft);line-height:1.5}
+.stats-row{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+  margin-top:8px;padding-top:22px;border-top:1px solid rgba(222,178,43,.25);
+}
+.stat{text-align:center}
+.stat-num{
+  font-family:var(--font-en);font-size:2.1rem;font-weight:700;
+  color:var(--gold-deep);display:block;line-height:1;
+}
+.stat-lbl{font-size:.73rem;font-weight:400;color:var(--text-soft);letter-spacing:.5px}
+
+/* PROMO */
+.promo{
+  background:linear-gradient(135deg,var(--brown) 0%,var(--gold-deep) 100%);
+  padding:80px 5%;text-align:center;position:relative;overflow:hidden;
+}
+.promo::before,.promo::after{
+  content:'❀';position:absolute;font-size:12rem;color:rgba(255,255,255,.05);line-height:1;
+}
+.promo::before{top:-30px;right:-20px}
+.promo::after{bottom:-30px;left:-20px}
+.promo-script{
+  font-family:var(--font-script);font-size:clamp(1.8rem,3.5vw,3rem);
+  color:var(--gold);display:block;margin-bottom:10px;
+}
+.promo-title{
+  font-family:var(--font-ar);font-size:clamp(1.4rem,3.5vw,2.6rem);
+  font-weight:900;color:var(--white);margin-bottom:12px;
+}
+.promo-desc{
+  font-size:1rem;font-weight:300;color:rgba(255,255,255,.75);
+  max-width:500px;margin:0 auto 34px;line-height:1.8;
+}
+
+/* ═══ CONTACT ═══ */
+#contact{background:var(--cream)}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1.2fr;
+  gap:70px;align-items:start;max-width:1100px;margin:0 auto;
+}
+.c-title{
+  font-family:var(--font-ar);font-size:1.75rem;font-weight:900;
+  color:var(--text);margin-bottom:5px;
+}
+.c-sub{font-size:.9rem;font-weight:300;color:var(--text-soft);margin-bottom:32px}
+.ci{
+  display:flex;align-items:center;gap:16px;padding:17px 0;
+  border-bottom:1px solid rgba(222,178,43,.2);transition:padding .3s;
+}
+.ci:hover{padding-right:12px}
+[dir="ltr"] .ci:hover{padding-right:0;padding-left:12px}
+.ci-icon{
+  width:44px;height:44px;border-radius:50%;background:var(--gold-pale);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold-deep);font-size:.88rem;flex-shrink:0;transition:all .3s;
+}
+.ci:hover .ci-icon{background:var(--gold-deep);color:var(--white);transform:scale(1.1)}
+.ci-lbl{font-size:.67rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-soft);margin-bottom:3px}
+.ci-val{font-family:var(--font-ar);font-size:.97rem;font-weight:600;color:var(--text);text-decoration:none;transition:color .3s}
+.ci-val:hover{color:var(--gold-deep)}
+.social-wrap{margin-top:32px}
+.soc-lbl{font-size:.67rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--text-soft);margin-bottom:12px;display:block}
+.soc-row{display:flex;gap:10px}
+.soc-btn{
+  width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(222,178,43,.35);
+  display:flex;align-items:center;justify-content:center;color:var(--text-soft);
+  font-size:.88rem;text-decoration:none;transition:all .35s var(--ease);
+}
+.soc-btn:hover{
+  background:var(--gold-deep);border-color:var(--gold-deep);
+  color:var(--white);transform:translateY(-4px);
+  box-shadow:0 8px 20px rgba(183,99,8,.35);
+}
+.cf-wrap{
+  background:var(--white);border-radius:24px;padding:46px 40px;
+  box-shadow:0 12px 50px rgba(106,43,8,.1);border-top:4px solid var(--gold);
+}
+.cf-title{font-family:var(--font-ar);font-size:1.45rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.cf-sub{font-size:.83rem;color:var(--text-soft);margin-bottom:28px}
+.fg{margin-bottom:16px}
+.fg label{
+  display:block;font-size:.7rem;font-weight:600;letter-spacing:2px;
+  text-transform:uppercase;color:var(--text-soft);margin-bottom:7px;
+}
+.fg input,.fg textarea,.fg select{
+  width:100%;padding:12px 15px;border:1.5px solid rgba(222,178,43,.25);
+  border-radius:10px;background:var(--cream);font-family:var(--font-ar);
+  font-size:.93rem;color:var(--text);outline:none;transition:all .3s var(--ease);
+}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--text-soft);font-weight:300}
+.fg input:focus,.fg textarea:focus,.fg select:focus{
+  border-color:var(--gold);background:var(--white);
+  box-shadow:0 0 0 3px rgba(222,178,43,.12);
+}
+.fg textarea{height:105px;resize:none}
+.fg select option{background:var(--white)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.f-submit{
+  width:100%;padding:14px;
+  background:linear-gradient(135deg,var(--gold-deep),var(--brown));
+  color:var(--white);border:none;border-radius:10px;font-family:var(--font-ar);
+  font-size:.97rem;font-weight:700;letter-spacing:1px;cursor:pointer;
+  margin-top:5px;transition:all .35s var(--ease);
+  box-shadow:0 6px 20px rgba(183,99,8,.35);
+}
+.f-submit:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(106,43,8,.45)}
+
+/* WhatsApp button */
+.wa-hint{
+  margin-top:12px;text-align:center;font-size:.78rem;
+  color:var(--text-soft);display:flex;align-items:center;
+  justify-content:center;gap:6px;
+}
+.wa-hint i{color:#25D366;font-size:1rem}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--text);padding:65px 5% 28px}
+.ft{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:44px;padding-bottom:48px;
+  border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:28px;
+}
+.f-script{font-family:var(--font-script);font-size:2.1rem;color:var(--gold);display:block;margin-bottom:3px}
+.f-sub-lbl{font-size:.63rem;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.28);display:block;margin-bottom:14px}
+.f-tag{font-size:.84rem;font-weight:300;color:rgba(255,255,255,.33);line-height:1.8;max-width:220px}
+.f-soc{display:flex;gap:8px;margin-top:20px}
+.f-soc-btn{
+  width:36px;height:36px;border-radius:50%;border:1px solid rgba(222,178,43,.2);
+  display:flex;align-items:center;justify-content:center;color:rgba(222,178,43,.4);
+  text-decoration:none;font-size:.82rem;transition:all .3s;
+}
+.f-soc-btn:hover{background:var(--gold-deep);border-color:var(--gold-deep);color:var(--white);transform:translateY(-3px)}
+.fc-title{font-size:.67rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:block}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.fc ul a{font-size:.85rem;color:rgba(255,255,255,.33);text-decoration:none;transition:color .3s}
+.fc ul a:hover{color:rgba(222,178,43,.7)}
+.fc address{font-style:normal;display:flex;flex-direction:column;gap:10px}
+.fc address p{font-size:.83rem;color:rgba(255,255,255,.33);line-height:1.6}
+.fb{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fc-copy{font-size:.73rem;color:rgba(255,255,255,.2)}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:34px;left:50%;
+  transform:translateX(-50%) translateY(100px);
+  background:var(--white);border:2px solid var(--gold);color:var(--brown);
+  padding:13px 28px;border-radius:40px;font-size:.88rem;font-weight:600;
+  z-index:99999;transition:transform .5s var(--ease-out),opacity .3s;
+  opacity:0;pointer-events:none;white-space:nowrap;
+  box-shadow:0 10px 40px rgba(106,43,8,.2);
+}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1024px){
+  .about-grid{grid-template-columns:1fr;gap:50px}
+  .about-imgs{height:380px}
+  .menu-grid{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr;gap:50px}
+  .ft{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:768px){
+  .nav-links,.nav-cta{display:none}
+  .hbg{display:flex}
+  .menu-grid{grid-template-columns:1fr}
+  .vals{grid-template-columns:1fr}
+  .cf-wrap{padding:30px 20px}
+  .f-row{grid-template-columns:1fr}
+  .ft{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:480px){
+  .hero-btns{flex-direction:column;align-items:center}
+  .hero-badges{gap:16px}
+  .ft{grid-template-columns:1fr}
+  .fb{flex-direction:column;align-items:center;text-align:center}
+  .about-imgs{height:300px}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<!-- NAVBAR -->
+<header id="nav">
+  <a href="#home" class="nav-logo">
+    <span class="nl-script" data-i18n="logo_main">المنار</span>
+    <span class="nl-sub" data-i18n="logo_sub">للحلويات الفاخرة</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#menu" data-i18n="nav_menu">قائمتنا</a></li>
+    <li><a href="#portfolio" data-i18n="nav_portfolio">أعمالنا</a></li>
+    <li><a href="#about" data-i18n="nav_about">من نحن</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">اتصل بنا</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-sw">
+      <button class="lb active" onclick="setLang('ar')">ع</button>
+      <button class="lb" onclick="setLang('fr')">FR</button>
+      <button class="lb" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#contact" class="nav-cta" data-i18n="nav_order">اطلب الآن</a>
+    <div class="hbg" id="hbg" onclick="toggleDrawer()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- DRAWER -->
+<div class="drawer" id="drawer">
+  <a href="#menu" onclick="closeDrawer()" data-i18n="nav_menu">قائمتنا</a>
+  <div class="floral" style="width:200px"><div class="fl"></div><div class="fd">❀</div><div class="fl"></div></div>
+  <a href="#portfolio" onclick="closeDrawer()" data-i18n="nav_portfolio">أعمالنا</a>
+  <div class="floral" style="width:200px"><div class="fl"></div><div class="fd">❀</div><div class="fl"></div></div>
+  <a href="#about" onclick="closeDrawer()" data-i18n="nav_about">من نحن</a>
+  <div class="floral" style="width:200px"><div class="fl"></div><div class="fd">❀</div><div class="fl"></div></div>
+  <a href="#contact" onclick="closeDrawer()" data-i18n="nav_contact">اتصل بنا</a>
+  <div class="lang-sw" style="border:1.5px solid rgba(222,178,43,.4);margin-top:6px">
+    <button class="lb" onclick="setLang('ar')" style="color:var(--text-mid)">ع</button>
+    <button class="lb" onclick="setLang('fr')" style="color:var(--text-mid)">FR</button>
+    <button class="lb" onclick="setLang('en')" style="color:var(--text-mid)">EN</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"><img src="sweet_pastry.jpg" alt="حلويات المنار" id="heroBg"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-deco deco-tr">❀</div>
+  <div class="hero-deco deco-bl">❀</div>
+  <div class="hero-content">
+    <span class="hero-pre" data-i18n="hero_pre">Al Manar Sweets — منذ 2013</span>
+    <h1 class="hero-h1" id="hAr" data-i18n="hero_ar">حلويات المنار</h1>
+    <h1 class="hero-h1-en" id="hEn" data-i18n="hero_en" style="display:none">Al Manar Sweets</h1>
+    <p class="hero-tag" data-i18n="hero_tag">أصالة الطعم — رقيّ الذوق</p>
+    <div class="hero-badges">
+      <div class="hb-item"><span class="hb-num">13+</span><span class="hb-label" data-i18n="b1">سنة خبرة</span></div>
+      <div class="hb-sep"></div>
+      <div class="hb-item"><span class="hb-num">500+</span><span class="hb-label" data-i18n="b2">عميل سعيد</span></div>
+      <div class="hb-sep"></div>
+      <div class="hb-item"><span class="hb-num">100%</span><span class="hb-label" data-i18n="b3">طازج يومياً</span></div>
+    </div>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-gold"><i class="fas fa-utensils"></i><span data-i18n="cta1">استعرض القائمة</span></a>
+      <a href="#contact" class="btn-ghost"><i class="fab fa-whatsapp"></i><span data-i18n="cta2">اطلب الآن</span></a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <i class="fas fa-chevron-down"></i>
+    <span data-i18n="scroll">اسحب للأسفل</span>
+  </div>
+</section>
+
+<!-- WAVE -->
+<div class="wave">
+  <svg viewBox="0 0 1440 55" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,28 C360,56 1080,0 1440,28 L1440,55 L0,55 Z" fill="#FDF6E3"/>
+  </svg>
+</div>
+
+<!-- MENU -->
+<section id="menu" class="section">
+  <div class="menu-hdr reveal">
+    <span class="s-script" data-i18n="m_script">Our Specialties</span>
+    <h2 class="s-title" data-i18n="m_title">تشكيلتنا المميزة</h2>
+    <div class="floral" style="max-width:280px;margin:14px auto 16px"><div class="fl"></div><div class="fd">❀ ❀ ❀</div><div class="fl"></div></div>
+    <p class="s-desc" data-i18n="m_desc">كل منتج يُحضَّر طازجاً كل صباح بأجود المكونات ووصفات متوارثة بعناية.</p>
+  </div>
+  <div class="menu-grid">
+    <article class="mc" data-delay="0">
+      <div class="mc-img">
+        <img src="sweet pastry.jpg" alt="معجنات حلوة">
+        <span class="mc-ribbon" data-i18n="r1">الأكثر طلباً</span>
+        <div class="mc-ov">
+          <button class="mc-ov-btn" onclick="orderItem('sweet')"><i class="fab fa-whatsapp"></i><span data-i18n="ord">اطلب الآن</span></button>
+        </div>
+      </div>
+      <div class="mc-body">
+        <span class="mc-icon">🍰</span>
+        <h3 class="mc-name" data-i18n="c1n">معجنات حلوة</h3>
+        <p class="mc-desc" data-i18n="c1d">مربعات الفيلفت الأحمر الفاخرة والكعكات المطبقة المحشوة بالكريمة الطازجة — كل قضمة احتفال بحد ذاتها.</p>
+        <a href="#contact" class="mc-btn"><i class="fas fa-heart"></i><span data-i18n="disc">اكتشف أكثر</span></a>
+      </div>
+    </article>
+    <article class="mc" data-delay="150">
+      <div class="mc-img">
+        <img src="savory pastry.jpg" alt="معجنات مالحة">
+        <span class="mc-ribbon" data-i18n="r2">شهيّ</span>
+        <div class="mc-ov">
+          <button class="mc-ov-btn" onclick="orderItem('savory')"><i class="fab fa-whatsapp"></i><span data-i18n="ord">اطلب الآن</span></button>
+        </div>
+      </div>
+      <div class="mc-body">
+        <span class="mc-icon">🥐</span>
+        <h3 class="mc-name" data-i18n="c2n">معجنات مالحة</h3>
+        <p class="mc-desc" data-i18n="c2d">عجين فرنسي مورق ذهبي اللون محشو بصلصة الفطر الكريمية والأعشاب الطازجة — هشاشة لا تُقاوم.</p>
+        <a href="#contact" class="mc-btn"><i class="fas fa-heart"></i><span data-i18n="disc">اكتشف أكثر</span></a>
+      </div>
+    </article>
+    <article class="mc" data-delay="300">
+      <div class="mc-img">
+        <img src="traditional sweets.jpg" alt="حلويات تقليدية">
+        <span class="mc-ribbon" data-i18n="r3">تراثي</span>
+        <div class="mc-ov">
+          <button class="mc-ov-btn" onclick="orderItem('trad')"><i class="fab fa-whatsapp"></i><span data-i18n="ord">اطلب الآن</span></button>
+        </div>
+      </div>
+      <div class="mc-body">
+        <span class="mc-icon">🍯</span>
+        <h3 class="mc-name" data-i18n="c3n">حلويات تقليدية</h3>
+        <p class="mc-desc" data-i18n="c3d">حلويات ذهبية أصيلة مغطاة بالعسل الطبيعي.</p>
+        <a href="#contact" class="mc-btn"><i class="fas fa-heart"></i><span data-i18n="disc">اكتشف أكثر</span></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- PORTFOLIO / GALLERY -->
+<section id="portfolio" class="section">
+  <div class="portfolio-hdr reveal">
+    <span class="s-script" data-i18n="pg_script">Our Creations</span>
+    <h2 class="s-title" data-i18n="pg_title">أعمالنا الأخيرة</h2>
+    <div class="floral" style="max-width:280px;margin:14px auto 16px"><div class="fl"></div><div class="fd">❀ ❀ ❀</div><div class="fl"></div></div>
+    <p class="s-desc" data-i18n="pg_desc">كل صورة تحكي قصة اجتهاد ومحبة — إبداع يتجدد كل يوم في مطبخنا.</p>
+  </div>
+
+  <!-- ════════════════════════════════════════════════
+       HOW TO ADD YOUR OWN PHOTOS:
+       Replace the src="..." in each <img> below
+       with the actual path to your photo file.
+       Example: src="my_cake_photo.jpg"
+       Add or remove <div class="gallery-item"> blocks as needed.
+  ════════════════════════════════════════════════ -->
+  <div class="gallery-grid reveal" style="transition-delay:.1s">
+
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="sweet pastry.jpg" alt="حلوى 1">
+      <div class="gi-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="savory pastry.jpg" alt="حلوى 2">
+      <div class="gi-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="traditional sweets.jpg" alt="حلوى 3">
+      <div class="gi-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="sweets.png" alt="حلوى 4">
+      <div class="gi-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="sweets2.png" alt="حلوى 5">
+      <div class="gi-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="sweet pastry.jpg" alt="حلوى 6">
+      <div class="gi-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="traditional sweets.jpg" alt="حلوى 7">
+      <div class="gi-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+    <div class="gallery-item" onclick="openLightbox(this)">
+      <img src="savory pastry.jpg" alt="حلوى 8">
+      <div class="gi-ov"><i class="fas fa-expand"></i></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="about-grid">
+    <div class="about-imgs reveal">
+      <img src="sweets.png" alt="" class="ai-main">
+      <img src="sweets2.png" alt="" class="ai-sec">
+      <div class="ai-badge">
+        <span class="aib-num">13+</span>
+        <span class="aib-txt" data-i18n="b_txt">سنة شغف</span>
+      </div>
+    </div>
+    <div class="about-text reveal" style="transition-delay:.2s">
+      <div>
+        <span class="s-script" data-i18n="a_script">Notre Histoire</span>
+        <h2 class="s-title" style="margin:0 0 10px" data-i18n="a_title">قصتنا مع الحلاوة</h2>
+        <div class="floral" style="justify-content:flex-start;max-width:180px;margin-bottom:16px"><div class="fl" style="flex:0 0 50px"></div><div class="fd" style="font-size:.85rem">❀</div></div>
+      </div>
+      <p class="about-desc" data-i18n="a_d1">تأسست حلويات المنار بحلم واحد — إيصال نكهات المعجنات التقليدية الأصيلة إلى كل بيت جزائري. وصفاتنا متوارثة عبر الأجيال، تُحضَّر بحب وعناية فائقة كل يوم.</p>
+      <p class="about-desc" data-i18n="a_d2">كل قضمة تحكي قصة من التراث والحرفية وأجود المكونات المحلية — من المعجنات الحلوة إلى الحلويات التقليدية الخالدة.</p>
+      <div class="vals">
+        <div class="val"><span class="val-icon">🌿</span><div><p class="val-title" data-i18n="v1t">مكونات طبيعية</p><p class="val-desc" data-i18n="v1d">نختار أجود المكونات المحلية الطازجة يومياً.</p></div></div>
+        <div class="val"><span class="val-icon">👩‍🍳</span><div><p class="val-title" data-i18n="v2t">صنع يدوي</p><p class="val-desc" data-i18n="v2d">كل قطعة تُصنع بيد الحرفية وبقلب مليء بالحب.</p></div></div>
+        <div class="val"><span class="val-icon">📦</span><div><p class="val-title" data-i18n="v3t">توصيل للمنزل</p><p class="val-desc" data-i18n="v3d">نوصل طلباتك طازجة مباشرة إلى باب منزلك.</p></div></div>
+        <div class="val"><span class="val-icon">🎂</span><div><p class="val-title" data-i18n="v4t">طلبات مخصصة</p><p class="val-desc" data-i18n="v4d">نصنع لك ما يُسعد قلبك في كل مناسبة.</p></div></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><span class="stat-num">500+</span><span class="stat-lbl" data-i18n="s1">عميل سعيد</span></div>
+        <div class="stat"><span class="stat-num">30+</span><span class="stat-lbl" data-i18n="s2">وصفة مميزة</span></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-lbl" data-i18n="s3">طازج يومياً</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO -->
+<div class="promo">
+  <span class="promo-script" data-i18n="p_script">Special Offer</span>
+  <h2 class="promo-title" data-i18n="p_title">اطلبي اليوم واحصلي على خصم خاص!</h2>
+  <p class="promo-desc" data-i18n="p_desc">نقدم خصومات مميزة على الطلبات الكبيرة والمناسبات — تواصلي معنا لمزيد من التفاصيل.</p>
+  <a href="https://wa.me/213555870861" target="_blank" rel="noopener" class="btn-gold" style="margin:0 auto;display:inline-flex"><i class="fab fa-whatsapp"></i><span data-i18n="p_btn">تواصلي معنا عبر واتساب</span></a>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="contact-grid">
+    <div class="reveal">
+      <h2 class="c-title" data-i18n="ct_title">تواصلي معنا</h2>
+      <p class="c-sub" data-i18n="ct_sub">يسعدنا استقبال طلباتك في أي وقت</p>
+
+      <div class="ci">
+        <div class="ci-icon"><i class="fas fa-phone"></i></div>
+        <div>
+          <p class="ci-lbl" data-i18n="lbl_ph">الهاتف</p>
+          <a href="tel:+213555870861" class="ci-val">+213 562 586 515</a>
+        </div>
+      </div>
+      <div class="ci">
+        <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+        <div>
+          <p class="ci-lbl" data-i18n="lbl_em">البريد الإلكتروني</p>
+          <a href="mailto:manarbourouba2003@gmail.com" class="ci-val">almanarsweets123@gmail.com</a>
+        </div>
+      </div>
+      <div class="ci">
+        <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div>
+          <p class="ci-lbl" data-i18n="lbl_ad">العنوان</p>
+          <span class="ci-val" data-i18n="addr">حي الصومام، تسالة المرجة، بئرتوتة</span>
+        </div>
+      </div>
+      <div class="ci">
+        <div class="ci-icon"><i class="fas fa-clock"></i></div>
+        <div>
+          <p class="ci-lbl" data-i18n="lbl_hr">أوقات العمل</p>
+          <span class="ci-val" data-i18n="hours">يومياً من 8 صباحاً حتى 10 مساءً</span>
+        </div>
+      </div>
+
+      <div class="social-wrap">
+        <span class="soc-lbl" data-i18n="follow">تابعونا</span>
+        <div class="soc-row">
+          <!-- ══ ضعي رابط صفحتك على فيسبوك بدل # ══ -->
+          <a href="https://www.facebook.com/YOUR_PAGE" target="_blank" rel="noopener" class="soc-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <!-- ══ ضعي رابط حسابك على انستغرام بدل # ══ -->
+          <a href="https://www.instagram.com/YOUR_ACCOUNT" target="_blank" rel="noopener" class="soc-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <!-- ══ ضعي رابط حسابك على تيكتوك بدل # ══ -->
+          <a href="https://www.tiktok.com/@YOUR_ACCOUNT" target="_blank" rel="noopener" class="soc-btn" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          <!-- واتساب مباشر -->
+          <a href="https://wa.me/213555870861" target="_blank" rel="noopener" class="soc-btn" aria-label="WhatsApp" style="color:#25D366"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cf-wrap reveal" style="transition-delay:.2s">
+      <h3 class="cf-title" data-i18n="f_title">أرسلي لنا رسالة</h3>
+      <p class="cf-sub" data-i18n="f_sub">سيصل طلبك مباشرة عبر واتساب 💕</p>
+      <form id="cForm" novalidate>
+        <div class="f-row">
+          <div class="fg">
+            <label data-i18n="f_name">الاسم</label>
+            <input type="text" id="fn" placeholder="اسمك الكريم" required>
+          </div>
+          <div class="fg">
+            <label data-i18n="f_phone">الهاتف</label>
+            <input type="tel" id="fp" placeholder="+213 ...">
+          </div>
+        </div>
+        <div class="fg">
+          <label data-i18n="f_int">أنا مهتمة بـ</label>
+          <select id="fi">
+            <option value="" data-i18n="f_sel">اختر صنف...</option>
+            <option value="معجنات حلوة" data-i18n="c1n">معجنات حلوة</option>
+            <option value="معجنات مالحة" data-i18n="c2n">معجنات مالحة</option>
+            <option value="حلويات تقليدية" data-i18n="c3n">حلويات تقليدية</option>
+            <option value="طلب مخصص" data-i18n="f_cust">طلب مخصص</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label data-i18n="f_msg">الرسالة</label>
+          <textarea id="fm" placeholder="أخبريني عن طلبك..."></textarea>
+        </div>
+        <button type="submit" class="f-submit" data-i18n="f_send">إرسال عبر واتساب ✦</button>
+        <p class="wa-hint"><i class="fab fa-whatsapp"></i> سيُفتح واتساب مباشرة بطلبك</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div>
+      <span class="f-script">المنار</span>
+      <span class="f-sub-lbl" data-i18n="logo_sub">للحلويات الفاخرة</span>
+      <p class="f-tag" data-i18n="f_tag">نصنع السعادة حلوى تلو الأخرى منذ 2013. بحب وشغف لا ينتهيان.</p>
+      <div class="f-soc">
+        <a href="https://www.facebook.com/YOUR_PAGE" target="_blank" rel="noopener" class="f-soc-btn"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/YOUR_ACCOUNT" target="_blank" rel="noopener" class="f-soc-btn"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@YOUR_ACCOUNT" target="_blank" rel="noopener" class="f-soc-btn"><i class="fab fa-tiktok"></i></a>
+        <a href="https://wa.me/213555870861" target="_blank" rel="noopener" class="f-soc-btn" style="color:#25D366"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="fc">
+      <span class="fc-title" data-i18n="nav_menu">قائمتنا</span>
+      <ul>
+        <li><a href="#menu" data-i18n="c1n">معجنات حلوة</a></li>
+        <li><a href="#menu" data-i18n="c2n">معجنات مالحة</a></li>
+        <li><a href="#menu" data-i18n="c3n">حلويات تقليدية</a></li>
+        <li><a href="#contact" data-i18n="f_cust">طلب مخصص</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <span class="fc-title" data-i18n="nav_menu2">روابط سريعة</span>
+      <ul>
+        <li><a href="#home" data-i18n="nav_home">الرئيسية</a></li>
+        <li><a href="#portfolio" data-i18n="nav_portfolio">أعمالنا</a></li>
+        <li><a href="#about" data-i18n="nav_about">من نحن</a></li>
+        <li><a href="#contact" data-i18n="nav_contact">اتصل بنا</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <span class="fc-title" data-i18n="nav_contact">تواصل</span>
+      <address>
+        <p>+213 555 870 861</p>
+        <p>manarbourouba2003@gmail.com</p>
+        <p data-i18n="addr">حي الصومام، تسالة المرجة، بئر توتة</p>
+        <p data-i18n="hours">يومياً 8ص — 10م</p>
+      </address>
+    </div>
+  </div>
+  <div class="fb">
+    <p class="fc-copy" data-i18n="f_copy">© 2026 حلويات المنار. جميع الحقوق محفوظة.</p>
+    <p class="fc-copy">Made with ❀</p>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════
+   TRANSLATIONS
+═══════════════════════════════════════ */
+const T={
+  ar:{
+    logo_main:"المنار", logo_sub:"للحلويات الفاخرة",
+    nav_menu:"قائمتنا", nav_menu2:"روابط سريعة", nav_portfolio:"أعمالنا",
+    nav_about:"من نحن", nav_contact:"اتصل بنا", nav_home:"الرئيسية", nav_order:"اطلب الآن",
+    hero_pre:"Al Manar Sweets — منذ 2013",
+    hero_ar:"حلويات المنار", hero_en:"",
+    hero_tag:"أصالة الطعم — رقيّ الذوق",
+    b1:"سنة خبرة", b2:"عميل سعيد", b3:"طازج يومياً",
+    cta1:"استعرض القائمة", cta2:"اطلب الآن", scroll:"اسحب للأسفل",
+    m_script:"Our Specialties", m_title:"تشكيلتنا المميزة",
+    m_desc:"كل منتج يُحضَّر طازجاً كل صباح بأجود المكونات ووصفات متوارثة بعناية.",
+    r1:"الأكثر طلباً", r2:"شهيّ", r3:"تراثي",
+    c1n:"معجنات حلوة", c1d:"مربعات الفيلفت الأحمر الفاخرة والكعكات المطبقة المحشوة بالكريمة الطازجة — كل قضمة احتفال بحد ذاتها.",
+    c2n:"معجنات مالحة", c2d:"عجين فرنسي مورق ذهبي اللون محشو بصلصة الفطر الكريمية والأعشاب الطازجة — هشاشة لا تُقاوم.",
+    c3n:"حلويات تقليدية", c3d:"حلويات ذهبية أصيلة مغطاة بالعسل الطبيعي.",
+    ord:"اطلب الآن", disc:"اكتشف أكثر",
+    pg_script:"Our Creations", pg_title:"أعمالنا الأخيرة",
+    pg_desc:"كل صورة تحكي قصة اجتهاد ومحبة — إبداع يتجدد كل يوم في مطبخنا.",
+    a_script:"Notre Histoire", a_title:"قصتنا مع الحلاوة",
+    a_d1:"تأسست حلويات المنار بحلم واحد — إيصال نكهات المعجنات التقليدية الأصيلة إلى كل بيت جزائري. وصفاتنا متوارثة عبر الأجيال، تُحضَّر بحب وعناية فائقة كل يوم.",
+    a_d2:"كل قضمة تحكي قصة من التراث والحرفية وأجود المكونات المحلية — من المعجنات الحلوة إلى الحلويات التقليدية الخالدة.",
+    b_txt:"سنة شغف",
+    v1t:"مكونات طبيعية", v1d:"نختار أجود المكونات المحلية الطازجة يومياً.",
+    v2t:"صنع يدوي",       v2d:"كل قطعة تُصنع بيد الحرفية وبقلب مليء بالحب.",
+    v3t:"توصيل للمنزل",   v3d:"نوصل طلباتك طازجة مباشرة إلى باب منزلك.",
+    v4t:"طلبات مخصصة",   v4d:"نصنع لك ما يُسعد قلبك في كل مناسبة.",
+    s1:"عميل سعيد", s2:"وصفة مميزة", s3:"طازج يومياً",
+    p_script:"Special Offer", p_title:"اطلبي اليوم واحصلي على خصم خاص!",
+    p_desc:"نقدم خصومات مميزة على الطلبات الكبيرة والمناسبات — تواصلي معنا لمزيد من التفاصيل.",
+    p_btn:"تواصلي معنا عبر واتساب",
+    ct_title:"تواصلي معنا", ct_sub:"يسعدنا استقبال طلباتك في أي وقت",
+    lbl_ph:"الهاتف", lbl_em:"البريد الإلكتروني", lbl_ad:"العنوان", lbl_hr:"أوقات العمل",
+    addr:"حي الصومام، تسالة المرجة، بئرتوتة",
+    hours:"يومياً من 8 صباحاً حتى 10 مساءً", follow:"تابعونا",
+    f_title:"أرسلي لنا رسالة", f_sub:"سيصل طلبك مباشرة عبر واتساب 💕",
+    f_name:"الاسم", f_phone:"الهاتف", f_int:"أنا مهتمة بـ",
+    f_sel:"اختر صنف...", f_cust:"طلب مخصص", f_msg:"الرسالة",
+    f_send:"إرسال عبر واتساب ✦",
+    f_tag:"نصنع السعادة حلوى تلو الأخرى منذ 2013. بحب وشغف لا ينتهيان.",
+    f_copy:"© 2026 حلويات المنار. جميع الحقوق محفوظة.",
+    t_ord:"🛍️ سيفتح واتساب الآن بطلبك!"
+  },
+  fr:{
+    logo_main:"Al Manar", logo_sub:"Pâtisserie de Luxe",
+    nav_menu:"Notre Menu", nav_menu2:"Liens Rapides", nav_portfolio:"Nos Créations",
+    nav_about:"À Propos", nav_contact:"Contact", nav_home:"Accueil", nav_order:"Commander",
+    hero_pre:"Al Manar Sweets — Depuis 2013",
+    hero_ar:"", hero_en:"Al Manar Sweets",
+    hero_tag:"Authenticité du Goût — Raffinement du Style",
+    b1:"Ans d'Expérience", b2:"Clients Heureux", b3:"Frais Quotidiennement",
+    cta1:"Voir le Menu", cta2:"Commander", scroll:"Défiler",
+    m_script:"Nos Spécialités", m_title:"Notre Collection Signature",
+    m_desc:"Chaque article est fraîchement préparé chaque matin selon des recettes traditionnelles.",
+    r1:"Plus Demandé", r2:"Savoureux", r3:"Traditionnel",
+    c1n:"Pâtisseries Sucrées", c1d:"Carrés de velours rouge et gâteaux à étages garnis de crème fraîche — chaque bouchée est une fête.",
+    c2n:"Pâtisseries Salées", c2d:"Feuilletés dorés garnis de sauce aux champignons et herbes fraîches — croustillants et délicieux.",
+    c3n:"Douceurs Traditionnelles", c3d:"Douceurs authentiques glacées au miel naturel.",
+    ord:"Commander", disc:"Découvrir",
+    pg_script:"Nos Créations", pg_title:"Nos Dernières Créations",
+    pg_desc:"Chaque photo raconte une histoire de passion et d'amour — une créativité renouvelée chaque jour.",
+    a_script:"Notre Histoire", a_title:"Notre Passion pour la Douceur",
+    a_d1:"Al Manar Sweets a été fondée avec un seul rêve — apporter les saveurs authentiques de la pâtisserie traditionnelle à chaque foyer algérien.",
+    a_d2:"Chaque bouchée raconte une histoire de patrimoine, de savoir-faire et des meilleurs ingrédients locaux.",
+    b_txt:"Ans de Passion",
+    v1t:"Ingrédients Naturels", v1d:"Nous choisissons les meilleurs ingrédients locaux frais chaque jour.",
+    v2t:"Fait Main",            v2d:"Chaque pièce est façonnée à la main avec amour et soin.",
+    v3t:"Livraison à Domicile", v3d:"Nous livrons vos commandes fraîches directement chez vous.",
+    v4t:"Commandes Personnalisées", v4d:"Nous créons ce qui rend votre cœur heureux.",
+    s1:"Clients Heureux", s2:"Recettes Uniques", s3:"Frais Quotidiennement",
+    p_script:"Offre Spéciale", p_title:"Commandez Aujourd'hui et Obtenez une Remise !",
+    p_desc:"Nous offrons des remises spéciales sur les grandes commandes et événements.",
+    p_btn:"Contactez-nous via WhatsApp",
+    ct_title:"Contactez-nous", ct_sub:"Nous sommes heureux de recevoir vos commandes",
+    lbl_ph:"Téléphone", lbl_em:"Email", lbl_ad:"Adresse", lbl_hr:"Horaires",
+    addr:"soumam rue, tessala el merdja, birtouta",
+    hours:"Tous les jours 8h – 22h", follow:"Suivez-nous",
+    f_title:"Envoyez-nous un Message", f_sub:"Votre commande sera envoyée via WhatsApp 💕",
+    f_name:"Votre Nom", f_phone:"Téléphone", f_int:"Je suis intéressé(e) par",
+    f_sel:"Choisir...", f_cust:"Commande Personnalisée", f_msg:"Message",
+    f_send:"Envoyer via WhatsApp ✦",
+    f_tag:"Créer de la joie une douceur à la fois depuis 2013.",
+    f_copy:"© 2026 Al Manar Sweets. Tous droits réservés.",
+    t_ord:"🛍️ WhatsApp va s'ouvrir avec votre commande !"
+  },
+  en:{
+    logo_main:"Al Manar", logo_sub:"Luxury Sweets",
+    nav_menu:"Our Menu", nav_menu2:"Quick Links", nav_portfolio:"Our Work",
+    nav_about:"About", nav_contact:"Contact", nav_home:"Home", nav_order:"Order Now",
+    hero_pre:"Est. 2013 — Handcrafted with Love",
+    hero_ar:"", hero_en:"Al Manar Sweets",
+    hero_tag:"Authentic Flavors — Luxurious Taste",
+    b1:"Years of Expertise", b2:"Happy Clients", b3:"Fresh Daily",
+    cta1:"Explore Menu", cta2:"Order Now", scroll:"Scroll Down",
+    m_script:"Our Specialties", m_title:"Our Signature Collection",
+    m_desc:"Every item is freshly prepared each morning using traditional recipes and premium ingredients.",
+    r1:"Best Seller", r2:"Savory", r3:"Traditional",
+    c1n:"Sweet Pastries", c1d:"Indulgent red velvet squares and layered cakes filled with fresh cream — every bite is a celebration.",
+    c2n:"Savory Pastries", c2d:"Golden puff pastry cups filled with creamy mushroom sauce and fresh herbs — irresistibly crispy.",
+    c3n:"Traditional Sweets", c3d:"Authentic golden sweets glazed with natural honey.",
+    ord:"Order Now", disc:"Discover More",
+    pg_script:"Our Creations", pg_title:"Our Latest Work",
+    pg_desc:"Every photo tells a story of dedication and love — creativity renewed every day in our kitchen.",
+    a_script:"Our Story", a_title:"Our Sweet Story",
+    a_d1:"Al Manar Sweets was founded with a single dream — to bring authentic traditional pastry flavors to every Algerian home. Our recipes are passed down through generations, prepared with love every day.",
+    a_d2:"Every bite tells a story of heritage, craftsmanship, and the finest locally-sourced ingredients.",
+    b_txt:"Years of Passion",
+    v1t:"Natural Ingredients",  v1d:"We choose the finest fresh local ingredients daily.",
+    v2t:"Handcrafted",          v2d:"Each piece is crafted by hand with love and care.",
+    v3t:"Home Delivery",        v3d:"We deliver your orders fresh directly to your door.",
+    v4t:"Custom Orders",        v4d:"We create what makes your heart happy for every occasion.",
+    s1:"Happy Clients", s2:"Unique Recipes", s3:"Fresh Daily",
+    p_script:"Special Offer", p_title:"Order Today and Get a Special Discount!",
+    p_desc:"We offer special discounts on large orders and events — contact us for more details.",
+    p_btn:"Contact Us via WhatsApp",
+    ct_title:"Get in Touch", ct_sub:"We're happy to receive your orders anytime",
+    lbl_ph:"Phone", lbl_em:"Email", lbl_ad:"Address", lbl_hr:"Hours",
+    addr:"Soumam road, tessala el merdja, birtouta",
+    hours:"Daily 8:00 AM – 10:00 PM", follow:"Follow Us",
+    f_title:"Send Us a Message", f_sub:"Your order will be sent directly via WhatsApp 💕",
+    f_name:"Your Name", f_phone:"Phone", f_int:"I'm interested in",
+    f_sel:"Choose...", f_cust:"Custom Order", f_msg:"Message",
+    f_send:"Send via WhatsApp ✦",
+    f_tag:"Crafting joy one sweet at a time since 2013. Made with love.",
+    f_copy:"© 2026 Al Manar Sweets. All rights reserved.",
+    t_ord:"🛍️ WhatsApp will open with your order!"
+  }
+};
+
+let lang = 'ar';
+const WHATSAPP = '213555870861'; // رقم واتساب
+
+/* ═══ Language Switcher ═══ */
+function setLang(l){
+  lang = l;
+  const html = document.documentElement;
+  html.lang = l;
+  html.dir  = l === 'ar' ? 'rtl' : 'ltr';
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if(T[l][k] !== undefined) el.textContent = T[l][k];
+  });
+
+  // Hero title — show Arabic h1 only in Arabic
+  const ar = document.getElementById('hAr');
+  const en = document.getElementById('hEn');
+  if(l === 'ar'){
+    ar.style.display = 'block';
+    en.style.display = 'none';
+  } else {
+    ar.style.display = 'none';
+    en.style.display = 'block';
+  }
+
+  // Language buttons
+  document.querySelectorAll('.lb').forEach(b => {
+    b.classList.remove('active');
+    const map = {ar:'ع', fr:'FR', en:'EN'};
+    if(b.textContent.trim() === map[l]) b.classList.add('active');
+  });
+}
+
+/* ═══ Navbar scroll ═══ */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('sc', window.scrollY > 55);
+});
+
+/* ═══ Drawer ═══ */
+function toggleDrawer(){
+  document.getElementById('hbg').classList.toggle('open');
+  document.getElementById('drawer').classList.toggle('open');
+  document.body.style.overflow = document.getElementById('drawer').classList.contains('open') ? 'hidden' : '';
+}
+function closeDrawer(){
+  document.getElementById('hbg').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ═══ Smooth scroll ═══ */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+    closeDrawer();
+  });
+});
+
+/* ═══ Reveal on scroll ═══ */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* ═══ Cards staggered ═══ */
+const cobs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      setTimeout(() => e.target.classList.add('visible'), parseInt(e.target.dataset.delay || 0));
+      cobs.unobserve(e.target);
+    }
+  });
+}, {threshold:.1});
+document.querySelectorAll('.mc').forEach(el => cobs.observe(el));
+
+/* ═══ Toast ═══ */
+function showToast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 4000);
+}
+
+/* ═══ Gallery Lightbox ═══ */
+function openLightbox(item){
+  const img = item.querySelector('img');
+  document.getElementById('lbImg').src = img.src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ═══ Form — sends via WhatsApp ═══ */
+document.getElementById('cForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name    = document.getElementById('fn').value.trim();
+  const phone   = document.getElementById('fp').value.trim();
+  const item    = document.getElementById('fi').value;
+  const message = document.getElementById('fm').value.trim();
+
+  if(!name){ document.getElementById('fn').focus(); return; }
+
+  // Build WhatsApp message
+  const text = `🌟 طلب جديد من موقع حلويات المنار 🌟\n\n` +
+               `👤 الاسم: ${name}\n` +
+               `📞 الهاتف: ${phone || 'لم يُحدد'}\n` +
+               `🍰 الصنف: ${item || 'لم يُحدد'}\n` +
+               `💬 الرسالة: ${message || 'لا توجد رسالة'}`;
+
+  const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+
+  showToast(T[lang].t_ord);
+  this.reset();
+});
+
+/* ═══ Order quick button ═══ */
+function orderItem(type){
+  const labels = { sweet:'معجنات حلوة', savory:'معجنات مالحة', trad:'حلويات تقليدية' };
+  const text = `🌟 طلب جديد — ${labels[type] || type}\nأرجو التواصل معي لتأكيد الطلب.`;
+  const url  = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+}
+</script>
+</body>
+</html>
